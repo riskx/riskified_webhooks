@@ -24,7 +24,7 @@ class RiskifiedWebhooks < Sinatra::Base
     post webhook do
       req_params = params
 
-      Queue.enq({params: req_params, headers: riskified_headers})
+      Queue.enq({hook: webhook, params: req_params, headers: riskified_headers})
     
       return_hash = {"order" => 0, "status" => 'processing'}
       response.status = 200
